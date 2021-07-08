@@ -1,5 +1,9 @@
 Project Info:
+
 Laravel:5.7
+
+PHP:7.2^
+
 Admin panel : https://laravel-admin.org/
 
 
@@ -9,8 +13,8 @@ Admin panel : https://laravel-admin.org/
 
 3.composer update
 
-5.change db connection in .env as you like
------------
+4.change db connection in .env as you like
+
     example:
     
     DB_CONNECTION=mysql
@@ -20,17 +24,17 @@ Admin panel : https://laravel-admin.org/
     DB_USERNAME=root
     DB_PASSWORD=
 
-4.Then run these commands to publish assets and config：
+5.Then run these commands to publish assets and config：
 
     php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
 
-5.At last run following command to finish install. 
+6.At last run following command to finish install. 
 
     php artisan admin:install 
 
-6.php artisan serve 
+7.php artisan serve 
 
-7.Open http://127.0.0.1:8000/admin/auth/login in browser 
+8.Open http://127.0.0.1:8000/admin/auth/login in browser 
 
     username :admin
     password: admin
