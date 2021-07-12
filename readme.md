@@ -5,7 +5,8 @@ Laravel:5.7
 PHP:7.2^
 
 Admin panel : https://laravel-admin.org/
-
+OAuth2 Laravel Passport  
+Design pattern : Repository pattern
 
 1.clone project
 
