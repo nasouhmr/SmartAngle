@@ -1,6 +1,7 @@
 <?php
 
 use App\Order;
+use App\Post;
 use Illuminate\Http\Request;
 
 /*
@@ -12,37 +13,27 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+*/ 
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// public routes
+Route::post('login', 'Api\AuthController@login');
+Route::post('register', 'Api\AuthController@register');
 
-Route::get('orders', function () {
-    $orders = Order::all();
-    $result = [];
-    if ($orders) {
-        foreach ($orders as $order) {
-            $items = [];
-            if ($order->orderItems) {
-                foreach ($order->orderItems as $item) {
-                    $items[] = [
-                        'qtn' => $item->qtn,
-                        'product' => $item->products
-                    ];
-                }
-            }
-            $row = [
-                'orderNumber' => $order->order_number,
-                'customer' => $order->customer,
-                'items' =>  $items
-            ];
-            $result[] =  $row;
-        }
-    }
-    return [
-        'data' => $result,
-        'status' => 200,
-        'message' => 'Data retrived successfully!'
-    ];
+// authinticated routes
+Route::middleware('auth:api')->group(function () {
+    Route::namespace('Api')->group(function () { 
+        
+        //Auth
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user', 'AuthController@getUser');
+
+        //Posts
+        Route::get('posts', 'PostController@getPosts');
+        Route::get('post', 'PostController@getPost');
+        Route::post('post', 'PostController@createPost');
+        
+        //Orders
+        Route::get('orders', 'OrderController@getOrders');
+
+    });
 });
