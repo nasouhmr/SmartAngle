@@ -28,9 +28,12 @@ Admin panel : https://laravel-admin.org/
 
     php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"
 
-6.At last run following command to finish install. 
+6.At last run following commands to finish install. 
 
+    php artisan migrate
     php artisan admin:install 
+    php artisan make:auth
+    php artisan passport:install
 
 7.php artisan serve 
 

@@ -40,30 +40,49 @@ class AuthController extends Controller
             if (Hash::check($request->password, $user->password)) {
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
                 $response = ['token' => $token];
-                return response($response, 200);
+                return response()->json([
+                    'data'         => $response,
+                    'message'      => 'success!',
+                    'error'      => 200
+                ], 200); 
             } else {
                 $response = "Password missmatch";
-                return response($response, 422);
+                return response()->json([
+                    'data'         => $response,
+                    'message'      => 'success!',
+                    'error'      => 422
+                ], 200); 
             }
         } else {
             $response = 'User does not exist';
-            return response($response, 422);
+            return response()->json([
+                'data'         => $response,
+                'message'      => 'success!',
+                'error'      => 422
+            ], 200); 
         }
     }
 
     public function logout(Request $request)
-    {
-
+    { 
         $token = $request->user()->token();
         $token->revoke();
 
         $response = 'You have been succesfully logged out!';
-        return response($response, 200);
+        return response()->json([
+            'data'         => $response,
+            'message'      => 'success!',
+            'error'      => 200
+        ], 200); 
     }
 
     public function getUser(Request $request)
     { 
-        return $request->user();
+        return response()->json([
+            'data'         => $request->user(),
+            'message'      => 'success!',
+            'error'      => 200
+        ], 200);  
     }
 
 }
